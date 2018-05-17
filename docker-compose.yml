@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  quorum:
+    image: barrongineer/quorum
+    container_name: quorum
+    ports:
+      - 22000:22000
+    tty: true
+    volumes:
+      - ${PWD}/genesis.json:/quorum-examples/examples/7nodes/genesis.json
+    working_dir: /quorum-examples/examples/7nodes
+    command: bash -c "./raft-init.sh && ./raft-start.sh && tail -f qdata/logs/1.log"
